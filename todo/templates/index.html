@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang='ja'>
+
+<head>
+    <meta charset='utf-8' />
+    <link rel='stylesheet' href='/static/css/style.css'>
+    <title>TODOアプリ</title>
+</head>
+
+<body>
+    <main>
+        <div id='title' class='title'>タスク</div>
+        <from name='f' method='post'>
+            <div class='text_area'><input type='text' name='new_text'></div>
+            <table>
+{% for task in tasks %}<!--１-->
+                <tr>
+                    <td
+                        class='card'
+                        id='task_{{task.id}}'
+                        task_id='{{task.id}}'>{{ task.text }}
+                        <!--{{task.id}}や{{task.text}}はtaskリストのidやtextを埋め込んでいる-->
+                    </td>
+                </tr>
+{% endfor %}<!--16行目とこの行で囲んだ部分でtasksのリストデータ分ループさせて、中のtr要素を複数生成していく-->
+            </table>
+        </from>
+    </main>
+</body>
+
+</html>
