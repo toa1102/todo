@@ -10,7 +10,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///todo.sqlite'
 #データーベースを作成
 db = SQLAlchemy(app)
 class Task(db.Model):
-    __tablename__ = 'tasks'
+    __tablename__ = "tasks"
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     text = db.Column(db.Text())
     status = db.Column(db.Integer)
@@ -18,7 +18,7 @@ class Task(db.Model):
 db.create_all()
 
 #ルーティングとindexにアクセスされた場合の処理を記述
-@app.route("/")
+@app.route('/')
 def index():
     tasks = Task.query.all()
     return render_template('index.html', tasks = tasks)

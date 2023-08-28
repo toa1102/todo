@@ -10,8 +10,8 @@
 <body>
     <main>
         <div id='title' class='title'>タスク</div>
-        <from name='f' method='post'>
-            <div class='text_area'><input type='text' name='new_text'></div>
+        <form name='f' method='post'>
+            <div class='text_area'><input type='text' name='new_text' id='new_text'></div>
             <table>
 {% for task in tasks %}<!--１-->
                 <tr>
@@ -19,12 +19,12 @@
                         class='card'
                         id='task_{{task.id}}'
                         task_id='{{task.id}}'>{{ task.text }}
-                        <!--{{task.id}}や{{task.text}}はtaskリストのidやtextを埋め込んでいる-->
+                        <!-- {{task.id}}や{{task.text}}はtaskリストのidやtextを埋め込んでいる -->
                     </td>
                 </tr>
-{% endfor %}<!--16行目とこの行で囲んだ部分でtasksのリストデータ分ループさせて、中のtr要素を複数生成していく-->
+{% endfor %}<!-- 16行目とこの行で囲んだ部分でtasksのリストデータ分ループさせて、中のtr要素を複数生成していく -->
             </table>
-        </from>
+        </form>
     </main>
 </body>
 
