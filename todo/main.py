@@ -26,6 +26,19 @@ def index():
     tasks = Task.query.all()
     return render_template("index.html", tasks = tasks)
 
+#登録処理用の関数。
+@app.route('/new', methods=["POST"])
+#上の部分について、@app.routeの1つ目の引数に/newを設定している。
+#だから、下のコードははlocalhost:8001/newでリクエストされたときに作動する。
+def new():
+    task = Task()
+    task.text = request.form["new_text"]
+    task.status = 0
+    db.session.add(task)
+    db.session.commit()
+    return redirect(url_for('index'))
+
+
 #app.run()でアプリケーションを起動する！
 app.run(debug=True, host=os.getenv('APP_ADDRESS', 'localhost'), port=8001)
 

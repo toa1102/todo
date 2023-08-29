@@ -5,6 +5,10 @@
     <meta charset='utf-8' />
     <link rel='stylesheet' href='/static/css/style.css'>
     <title>TODOアプリ</title>
+    <script
+    src="https://code.jquery.com/jquery-3.5.1.js"
+    integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+    crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -26,6 +30,21 @@
             </table>
         </form>
     </main>
+    <!-- 2 -->
+    <script>
+        $(document).ready(function(){
+            $('#new_text').keydown(function(e) {
+                if (e.keyCode == 13) {
+                    $('form[name="f"]').attr('action', '/new')
+                    $('form[name="f"]').submit();
+                }
+            });
+        });
+    </script>
+    <!-- 2からここまでのコードについて -->
+    <!-- keyCodeの13がEnterに該当。 -->
+    <!-- Enterを押したらフォームのactionに/newを指定しサブミット。 -->
+    <!-- これでEnterを押した時登録できる。 -->
 </body>
 
 </html>
