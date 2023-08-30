@@ -38,6 +38,17 @@ def new():
     db.session.commit()
     return redirect(url_for('index'))
 
+#完了処理用の関数
+@app.route('/completion')
+def completion():
+    id = request.form["id"]
+    task = Task.query.filter_by(id=id).first()
+    task.status = 1
+    db.session.commit()
+    return redirect(url_for('index'))
+#上の部分について
+#htmlのフォームからidを受け、Task.query.filter_by()を使ってデータを取得。
+#数字で完了(1)・未完了(0)を判断
 
 #app.run()でアプリケーションを起動する！
 app.run(debug=True, host=os.getenv('APP_ADDRESS', 'localhost'), port=8001)
