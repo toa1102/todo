@@ -31,6 +31,7 @@
 {% endfor %}<!-- 16行目とこの行で囲んだ部分でtasksのリストデータ分ループさせて、中のtr要素を複数生成していく -->
             </table>
             <input type="hidden" name="id" id="id">
+            <!-- 更新処理にはidが必要だから、hiddenでidを渡す！ -->
         </form>
     </main>
     <!-- 2 -->
@@ -49,6 +50,7 @@
     <!-- Enterを押したらフォームのactionに/newを指定しサブミット。 -->
     <!-- これでEnterを押した時登録できる。 -->
     <script type="text/javascript" src="/static/js/jquery.longpress.js"></script>
+    <!-- javascriptの読み込みをしている。 -->
     <script>
         $(document).ready(function(){
             $('#new_text').keydown(function(e) {
@@ -67,6 +69,10 @@
             );
         });
     </script>
+    <!-- 上の部分について（scriptで囲まれたところ） -->
+    <!-- longpressというイベントを使用 -->
+    <!-- 引数の1000は単位がミリ秒だから1秒分！ -->
+    <!--  -->
 </body>
 
 </html>
