@@ -39,7 +39,7 @@ def new():
     return redirect(url_for('index'))
 
 #完了処理用の関数
-@app.route('/completion')
+@app.route('/completion', methods=["POST"])
 def completion():
     id = request.form["id"]
     task = Task.query.filter_by(id=id).first()
