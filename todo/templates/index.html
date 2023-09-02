@@ -27,13 +27,23 @@
                         <!-- task.statusが1の場合#FFFF00(黄色)、0の場合#FFFFFF(白色)が適用される -->
                         <!-- {{task.id}}や{{task.text}}はtaskリストのidやtextを埋め込んでいる -->
                     </td>
+                    <td class="td_update_txt" id="td_update_txt_{{task.id}}">
+                        <input type="text" class="txt_update" name="update_txt" task_id="{{ task.id }}" value="{{ task.text }}">
+                    </td>
+                    <td class="button"><button type="button" name="btn_update" value="{{ task.id }}">変更</button></td>
                 </tr>
+                <!-- update_txtがタスクの更新用のテキストボックスだが、更新ボタンを押すまでは隠しておく -->
+                <!-- style.cssでtd_update_txtクラスを非表示にしてある -->
 {% endfor %}<!-- 16行目とこの行で囲んだ部分でtasksのリストデータ分ループさせて、中のtr要素を複数生成していく -->
             </table>
             <input type="hidden" name="id" id="id">
+            <input type="hidden" name="text" id="text">
             <!-- 更新処理にはidが必要だから、hiddenでidを渡す！ -->
+            <!-- 更新用テキストボックスの内容を渡すためのhidden項目 -->
         </form>
     </main>
+
+    <!-- 登録処理 -->
     <!-- 2 -->
     <script>
         $(document).ready(function(){
@@ -51,6 +61,8 @@
     <!-- これでEnterを押した時登録できる。 -->
     <script type="text/javascript" src="/static/js/jquery.longpress.js"></script>
     <!-- javascriptの読み込みをしている。 -->
+
+    <!-- 完了処理 -->
     <script>
         $(document).ready(function(){
             $('#new_text').keydown(function(e) {
@@ -72,6 +84,35 @@
     <!-- 上の部分について（scriptで囲まれたところ） -->
     <!-- longpressというイベントを使用 -->
     <!-- 引数の1000は単位がミリ秒だから1秒分！ -->
+    
+    <!-- 更新処理 -->
+    $('button[name="btn_update"]').click(function() {
+        var id = $(this).val();
+        if ($('#update_txt_' + id).is(':visible')) {
+            $('#update_txt' + id).hide();
+            $('#task_' + id).show();
+            $(this).text('変更');
+        } else {
+            $('#update_txt_' + id).show();
+            $('#task_' + id).hide();
+            $(this).text('戻す');
+        }
+    });
+    <!-- 上の部分について -->
+    <!-- 押された変更ボタンに紐づいているタスクをテキストボックスに変えている。 -->
+    <!-- 変更ボタンを戻るボタンに変えています。 -->
+    $('input[name="update_txt"]').keydown(function(e) {
+        if (e.keyCode == 13) {
+            var id = $(this).attr("task_id");
+            $('#id').val(id);
+            var text = $(this).val();
+            $('#text').val(text);
+            $('form[name="f"]').attr('action', '/update');
+            $('form[name="f"]').submit();
+        }
+    });
+    <!-- Enterを押したら更新処理が始まる。（前の部分と同様でkeyの13がEnter） -->
+    <!-- 更新に必要なidとtextはhidden項目を通じて渡している -->
     <!--  -->
 </body>
 

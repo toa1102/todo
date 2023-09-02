@@ -50,6 +50,17 @@ def completion():
 #htmlのフォームからidを受け、Task.query.filter_by()を使ってデータを取得。
 #数字で完了(1)・未完了(0)を判断
 
+#変更処理(途中！)
+@app.route('/update', methods=["POST"])
+def update():
+    id = request.form["id"]
+    text = request.form["text"]
+    task = Task.query.filter_by(id=id).first()
+    task.text = text
+    db.session.commit()
+    return redirect(url_for('index'))
+#上の部分について
+
 #app.run()でアプリケーションを起動する！
 app.run(debug=True, host=os.getenv('APP_ADDRESS', 'localhost'), port=8001)
 
