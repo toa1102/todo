@@ -68,7 +68,7 @@
             $('#new_text').keydown(function(e) {
                 if (e.keyCode == 13) {
                     $('form[name="f"]').attr('action', '/new')
-                    $('from[name="f"]').submit();
+                    $('form[name="f"]').submit();
                 }
             });
             $('.card').longpress(function() {
@@ -80,40 +80,48 @@
                 1000
             );
         });
+
     </script>
     <!-- 上の部分について（scriptで囲まれたところ） -->
     <!-- longpressというイベントを使用 -->
     <!-- 引数の1000は単位がミリ秒だから1秒分！ -->
+
+    <!-- 更新処理 --><!-- chatGPTより間違いあり修正中 -->
+    <script>
+        $('button[name="btn_update"]').click(function() {
+            var id = $(this).val();
+            if ($('#update_txt_' + id).is(':visible')) {
+                $('#update_txt' + id).hide();
+                $('#task_' + id).show();
+                $(this).text('変更');
+            } else {
+                $('#update_txt_' + id).show();
+                $('#task_' + id).hide();
+                $(this).text('戻す');
+            }
+        });
+
     
-    <!-- 更新処理 -->
-    $('button[name="btn_update"]').click(function() {
-        var id = $(this).val();
-        if ($('#update_txt_' + id).is(':visible')) {
-            $('#update_txt' + id).hide();
-            $('#task_' + id).show();
-            $(this).text('変更');
-        } else {
-            $('#update_txt_' + id).show();
-            $('#task_' + id).hide();
-            $(this).text('戻す');
-        }
-    });
+        $('input[name="update_txt"]').keydown(function(e) {
+            if (e.keyCode == 13) {
+                var id = $(this).attr("task_id");
+                $('#id').val(id);
+                var text = $(this).val();
+                $('#text').val(text);
+                $('form[name="f"]').attr('action', '/update');
+                $('form[name="f"]').submit();
+            }
+        });
+
+    </script>
     <!-- 上の部分について -->
     <!-- 押された変更ボタンに紐づいているタスクをテキストボックスに変えている。 -->
     <!-- 変更ボタンを戻るボタンに変えています。 -->
-    $('input[name="update_txt"]').keydown(function(e) {
-        if (e.keyCode == 13) {
-            var id = $(this).attr("task_id");
-            $('#id').val(id);
-            var text = $(this).val();
-            $('#text').val(text);
-            $('form[name="f"]').attr('action', '/update');
-            $('form[name="f"]').submit();
-        }
-    });
+
     <!-- Enterを押したら更新処理が始まる。（前の部分と同様でkeyの13がEnter） -->
     <!-- 更新に必要なidとtextはhidden項目を通じて渡している -->
     <!--  -->
+
 </body>
 
 </html>
