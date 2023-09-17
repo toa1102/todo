@@ -88,10 +88,10 @@
 
     <!-- 更新処理 --><!-- chatGPTより間違いあり修正中 -->
     <script>
-        $('button[nae="btn_update"]').click(function() {
+        $('button[name="btn_update"]').click(function() {
             var id = $(this).val();
             if ($('#update_txt_' + id).is(':visible')) {
-                $('#update_txt' + id).hide();
+                $('#update_txt_' + id).hide();
                 $('#task_' + id).show();
                 $(this).text('変更');
             } else {
@@ -99,6 +99,7 @@
                 $('#task_' + id).hide();
                 $(this).text('戻す');
             }
+            
         });
 
 
