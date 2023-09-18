@@ -90,20 +90,26 @@
     <script>
         $('button[name="btn_update"]').click(function() {
             var id = $(this).val();
-            if ($('#update_txt_' + id).is(':visible')) {
-                $('#update_txt_' + id).hide();
+            if ($('#td_update_txt_' + id).is(':visible')) {
+                $('#td_update_txt_' + id).hide();
                 $('#task_' + id).show();
                 $(this).text('変更');
             } else {
-                $('#update_txt_' + id).show();
+                $('#td_update_txt_' + id).show();
                 $('#task_' + id).hide();
                 $(this).text('戻す');
             }
-            
         });
 
 
-    
+    </script>
+
+    <!-- 上の部分について -->
+    <!-- 押された変更ボタンに紐づいているタスクをテキストボックスに変えている。 -->
+    <!-- 変更ボタンを戻るボタンに変えています。 -->
+
+
+    <script>
         $('input[name="update_txt"]').keydown(function(e) {
             if (e.keyCode == 13) {
                 var id = $(this).attr("task_id");
@@ -116,9 +122,6 @@
         });
 
     </script>
-    <!-- 上の部分について -->
-    <!-- 押された変更ボタンに紐づいているタスクをテキストボックスに変えている。 -->
-    <!-- 変更ボタンを戻るボタンに変えています。 -->
 
     <!-- Enterを押したら更新処理が始まる。（前の部分と同様でkeyの13がEnter） -->
     <!-- 更新に必要なidとtextはhidden項目を通じて渡している -->

@@ -50,7 +50,7 @@ def completion():
 #htmlのフォームからidを受け、Task.query.filter_by()を使ってデータを取得。
 #数字で完了(1)・未完了(0)を判断
 
-#変更処理(途中！)
+#変更処理
 @app.route('/update', methods=["POST"])
 def update():
     id = request.form["id"]
