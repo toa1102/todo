@@ -61,6 +61,16 @@ def update():
     return redirect(url_for('index'))
 #上の部分について
 
+#削除処理
+@app.route('/delete', methods=["POST"])
+def delete():
+    id = request.form["id"]
+    task = Task.query.filter_by(id=id).first()
+    db.session.delete(task)
+    db.session.commit()
+    return redirect(url_for('index'))
+
+
 #app.run()でアプリケーションを起動する！
 app.run(debug=True, host=os.getenv('APP_ADDRESS', 'localhost'), port=8001)
 

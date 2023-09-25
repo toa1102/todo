@@ -31,6 +31,7 @@
                         <input type="text" class="txt_update" name="update_txt" task_id="{{ task.id }}" value="{{ task.text }}">
                     </td>
                     <td class="button"><button type="button" name="btn_update" value="{{ task.id }}">変更</button></td>
+                    <td class="button"><button type="button" name="btn_delete" value="{{ task.id }}">削除</button></td>
                 </tr>
                 <!-- update_txtがタスクの更新用のテキストボックスだが、更新ボタンを押すまでは隠しておく -->
                 <!-- style.cssでtd_update_txtクラスを非表示にしてある -->
@@ -123,10 +124,25 @@
 
     </script>
 
+
+
     <!-- Enterを押したら更新処理が始まる。（前の部分と同様でkeyの13がEnter） -->
     <!-- 更新に必要なidとtextはhidden項目を通じて渡している -->
     <!--  -->
 
+    <!-- 削除 -->
+    <script>
+        $('button[name="btn_delete"]').click(function() {
+            var id = $(this).val();
+            $('#id').val(id);
+            $('form[name="f"]').attr('action', '/delete');
+            $('form[name="f"]').submit();
+        });
+    </script>
+    <!-- ボタンを表示して、クリックしたら消えるようにする！ -->
+
 </body>
 
 </html>
+
+<!-- 終了 -->
